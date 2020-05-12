@@ -1,7 +1,10 @@
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -45,9 +48,16 @@ public class WordCount {
         }
     }
 
+    public static void output_config(String[] args, Configuration conf) throws IOException, URISyntaxException {
+        Path outputPath = new Path(args[1]);
+        FileSystem fs = FileSystem.get(new URI(outputPath.toString()), conf);
+        fs.delete(outputPath, true);
+    }
+
     public static void main(String[] args) throws Exception {
         System.setProperty("hadoop.home.dir", "C:\\hadoop" );
         Configuration conf = new Configuration();
+        output_config(args, conf);
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCount.class);
         job.setMapperClass(TokenizerMapper.class);
