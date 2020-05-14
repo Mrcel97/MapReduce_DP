@@ -37,7 +37,7 @@ public class SortedTreeMap<K, V> {
         for (Pair<K, V> item : map) {
             if (item.getKey() == key) {
                 extraction = item;
-                this.map.remove(new Pair<>(item.getKey(), item.getValue()));
+                this.map.remove(item);
                 return extraction;
             }
         }
