@@ -8,16 +8,12 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.chain.ChainMapper;
-import org.apache.hadoop.mapreduce.lib.chain.ChainReducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.map.RegexMapper;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.util.GenericOptionsParser;
 
 public class MapReduce {
 
@@ -72,21 +68,26 @@ public class MapReduce {
         ChainMapper.addMapper(job, SpanishLangMapper.class, Text.class, LongWritable.class,
                 Text.class, LongWritable.class, mapConf4);
 
-        // MAP0: Trending Topics
-        Configuration mapConf0 = new Configuration(false);
-        ChainMapper.addMapper(job, TrendingTopicsMapper.class, Text.class, LongWritable.class,
-                Text.class, LongWritable.class, mapConf0);
-
-        // MAP-N: Trending Topics
+//        // MAP0: Trending Topics
+//        Configuration mapConf0 = new Configuration(false);
+//        ChainMapper.addMapper(job, TrendingTopicsMapper.class, Text.class, LongWritable.class,
+//                Text.class, LongWritable.class, mapConf0);
+//
+//        // Reducer count one's
+//        Configuration reduceConf = new Configuration(false);
+//        ChainReducer.setReducer(job, LongSumReducer.class, Text.class, LongWritable.class,
+//                Text.class, LongWritable.class, reduceConf);
+//
+//        // MAP-N: Trending Topics
 //        Configuration mapConfN = new Configuration(false);
 //        mapConfN.set("n", "5");
-//        ChainMapper.addMapper(job, TopNMapper.class, Text.class, LongWritable.class,
+//        ChainReducer.addMapper(job, TopNMapper.class, Text.class, LongWritable.class,
 //                NullWritable.class, Text.class, mapConfN);
-
-        // Reducer count one's
-        Configuration reduceConf = new Configuration(false);
-        ChainReducer.setReducer(job, LongSumReducer.class, Text.class, LongWritable.class,
-                Text.class, LongWritable.class, reduceConf);
+//
+//        Configuration mapConfN2 = new Configuration(false);
+//        mapConfN2.set("n", "5");
+//        ChainReducer.setReducer(job, TopNReducer.class, Text.class, LongWritable.class,
+//                NullWritable.class, Text.class, mapConfN2);
 
         job.setJarByClass(MapReduce.class);
         job.setOutputKeyClass(Text.class);
