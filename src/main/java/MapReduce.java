@@ -7,8 +7,8 @@ import mappers.*;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -77,7 +77,11 @@ public class MapReduce {
         ChainMapper.addMapper(job, TrendingTopicsMapper.class, Text.class, LongWritable.class,
                 Text.class, LongWritable.class, mapConf0);
 
-        // TOP - N
+        // MAP-N: Trending Topics
+//        Configuration mapConfN = new Configuration(false);
+//        mapConfN.set("n", "5");
+//        ChainMapper.addMapper(job, TopNMapper.class, Text.class, LongWritable.class,
+//                NullWritable.class, Text.class, mapConfN);
 
         // Reducer count one's
         Configuration reduceConf = new Configuration(false);
