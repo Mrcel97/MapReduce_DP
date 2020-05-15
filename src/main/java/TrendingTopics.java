@@ -16,6 +16,9 @@ import org.apache.hadoop.mapreduce.lib.chain.ChainReducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * This class refers to the Point 1. of the MASSIVE DATA PROCESSING, MapReduce programing practice.
+ */
 public class TrendingTopics {
 
     public static class LongSumReducer

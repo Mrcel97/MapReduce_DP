@@ -15,6 +15,9 @@ import org.apache.hadoop.mapreduce.lib.chain.ChainMapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * This class refers to the Point 2. of the MASSIVE DATA PROCESSING, MapReduce programing practice.
+ */
 public class MapReduce {
 
     public static class LongSumReducer
