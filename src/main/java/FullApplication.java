@@ -121,7 +121,7 @@ public class FullApplication {
         // Job 2: Map + Reduce
         Configuration job2Conf = new Configuration();
         output_config(args, job2Conf);
-        job2Conf.set("n", "5");
+        job2Conf.set("n", args[2]);
         Job job2 = Job.getInstance(job2Conf, "MapReduce.FullApplication");
         job2.setJarByClass(FullApplication.class);
         job2.setInputFormatClass(KeyValueTextInputFormat.class); // format input (Text,Text) (7)
