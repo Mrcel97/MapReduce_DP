@@ -13,3 +13,4 @@ Each one has its own execution inside the folder: <code>/src/main/java</code>
 1. Trending topics: TrendingTopics.java
 2. Text clean-up using chain mapper: MapReduce.java
 3. The Top-N pattern: TopN.java
+4. Map-reduce Jobs integration: FullApplication.java
