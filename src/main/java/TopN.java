@@ -16,6 +16,9 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * This class refers to the Point 3. of the MASSIVE DATA PROCESSING, MapReduce programing practice.
+ */
 public class TopN {
 
     public static class LongSumReducer
@@ -72,7 +75,7 @@ public class TopN {
         job2Conf.set("n", "5");
         Job job2 = Job.getInstance(job2Conf, "MapReduce.TopN");
         job2.setJarByClass(TopN.class);
-        job2.setInputFormatClass(KeyValueTextInputFormat.class); // Java-provided format to parse "key\tvalue" input
+        job2.setInputFormatClass(KeyValueTextInputFormat.class); // Java-provided format to parse "key\tvalue" input (Text,Text)
         job2.setMapperClass(TopNMapper.class); // MapHashtags
         job2.setReducerClass(TopNReducer.class); // ReduceHashtags
 
