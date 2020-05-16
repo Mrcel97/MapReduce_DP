@@ -11,6 +11,16 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * This Mapper is part of the MASSIVE DATA PROCESSING, MapReduce programing practice.<br>
+ *  - It aims to answer the Statement point 5: "Sentiment of hashtags"<br>
+ * <br>
+ * Usage:<br>
+ *     <b>InputKey:</b> NullWritable<br>
+ *     <b>InputValue:</b> Text<br>
+ *     <b>OutputKey:</b> Text<br>
+ *     <b>OutputValue:</b> DoubleWritable<br>
+ */
 public class SentimentReducer extends Reducer<NullWritable, Text, Text, DoubleWritable> {
     private final Map<String, Pair<Double, Double>> sentimentCollector = new HashMap<>(); // Hashtag-based
 

@@ -9,10 +9,18 @@ import com.google.common.io.Files;
 import javafx.util.Pair;
 import org.apache.hadoop.mapred.InvalidFileTypeException;
 
+/**
+ * Helper class focused on loading lexicon related files and operations.
+ */
 public class Lexicon {
     private final File dataLexicon;
     private final Map<String, HashMap<String, List<String>>> lexicon = new HashMap<>();
 
+    /**
+     * Constructor will create the Lexicon helper, load lexicon files based on param "lexiconPath".
+     * @param lexiconPath Refers to the folder containing all the Lexicon files.
+     * @throws IOException Only thrown when provided folder is not accessible.
+     */
     public Lexicon(String lexiconPath) throws IOException {
         this.dataLexicon = new File(lexiconPath);
         List<File> lexiconFiles = extractLexicons();

@@ -12,6 +12,21 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InvalidClassException;
 
+/**
+ * This Mapper is part of the MASSIVE DATA PROCESSING, MapReduce programing practice.<br>
+ *  - It aims to answer the Statement point 5: "Sentiment of hashtags"<br>
+ * <br>
+ * Usage:<br>
+ *     <b>InputKey:</b> Object or Text<br>
+ *     <b>InputValue:</b> Text or LongWritable<br>
+ *     <b>OutputKey:</b> NullWritable<br>
+ *     <b>OutputValue:</b> Text<br>
+ * <br>
+ * Warning:<br>
+ *     Types from InputKey and InputValue go together the only combinations available are:<br>
+ *         - Object and Text<br>
+ *         - Text and LongWritable<br>
+ */
 public class SentimentMapper<K, V> extends Mapper<K, V, NullWritable, Text> implements MultiInputMapper<K, V, JSONObject> {
     private Lexicon lexicon;
     private final static LongWritable one = new LongWritable(1);
@@ -26,7 +41,7 @@ public class SentimentMapper<K, V> extends Mapper<K, V, NullWritable, Text> impl
     }
 
     public void map(K key, V value, Context context) throws IOException, InterruptedException {
-        JSONObject jObject = new JSONObject(value.toString());
+        JSONObject jObject = parseInput(key, value);
 
         if (!jObject.has("text") || !jObject.has("lang")) return;
 

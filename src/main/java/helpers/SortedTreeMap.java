@@ -7,6 +7,11 @@ import org.apache.hadoop.io.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Duplicated keys sorting Map structure. It saves duplicated registers as well as sort them at once using a function.
+ * @param <K> Key
+ * @param <V> Value
+ */
 public class SortedTreeMap<K, V> {
     public ObservableList<K> keys = FXCollections.observableArrayList();
     List<Pair<K, V>> map = new ArrayList<>();
