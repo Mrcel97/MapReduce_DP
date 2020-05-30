@@ -1,6 +1,7 @@
 package mappers;
 
 import helpers.MultiInputMapper;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -9,6 +10,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InvalidClassException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This Mapper is part of the MASSIVE DATA PROCESSING, MapReduce programing practice.<br>
@@ -28,18 +31,16 @@ import java.io.InvalidClassException;
 public class TrendingTopicsMapper<K, V> extends Mapper<K, V, Text, LongWritable> implements MultiInputMapper<K, V, JSONObject> {
     private final static LongWritable one = new LongWritable(1);
     private final Text word = new Text();
+    private final Pattern pattern = Pattern.compile("(?<=[#])[A-Za-z0-9-_]+");
 
     public void map(K key, V value, Context context) throws IOException, InterruptedException {
         JSONObject jObject = parseInput(key, value);
-        if (jObject.has("entities")) {
-            JSONObject entities = jObject.getJSONObject("entities");
-            if (entities.has("hashtags")) {
-                JSONArray hashtags = entities.getJSONArray("hashtags");
-                for (Object item : hashtags) {
-                    JSONObject hashtag = (JSONObject) item;
-                    word.set(hashtag.get("text").toString());
-                    context.write(word, one);
-                }
+        if (jObject.has("text")) {
+            String tweetText = jObject.get("text").toString();
+            Matcher matcher = pattern.matcher(tweetText);
+            while (matcher.find()) {
+                word.set(matcher.group());
+                context.write(word, one);
             }
         }
     }

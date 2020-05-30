@@ -71,27 +71,6 @@ public class MapReduce {
         ChainMapper.addMapper(job, SpanishLangMapper.class, Text.class, LongWritable.class,
                 Text.class, LongWritable.class, mapConf4);
 
-//        // MAP0: Trending Topics
-//        Configuration mapConf0 = new Configuration(false);
-//        ChainMapper.addMapper(job, TrendingTopicsMapper.class, Text.class, LongWritable.class,
-//                Text.class, LongWritable.class, mapConf0);
-//
-//        // Reducer count one's
-//        Configuration reduceConf = new Configuration(false);
-//        ChainReducer.setReducer(job, LongSumReducer.class, Text.class, LongWritable.class,
-//                Text.class, LongWritable.class, reduceConf);
-//
-//        // MAP-N: Trending Topics
-//        Configuration mapConfN = new Configuration(false);
-//        mapConfN.set("n", "5");
-//        ChainReducer.addMapper(job, TopNMapper.class, Text.class, LongWritable.class,
-//                NullWritable.class, Text.class, mapConfN);
-//
-//        Configuration mapConfN2 = new Configuration(false);
-//        mapConfN2.set("n", "5");
-//        ChainReducer.setReducer(job, TopNReducer.class, Text.class, LongWritable.class,
-//                NullWritable.class, Text.class, mapConfN2);
-
         job.setJarByClass(MapReduce.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(LongWritable.class);
